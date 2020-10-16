@@ -17,7 +17,7 @@ public class Tavunu {
     public Tavunu()
     {
         name = "";
-        birthdate = 0;
+        birthdate = Integer.MIN_VALUE;
         pavaamnt = 0;
     }
     Tavunu(String a, int b, int c)
@@ -27,44 +27,68 @@ public class Tavunu {
         pavaamnt = c; 
     }
     
-    public void Tavunu()
+
+    public Boolean setName(String newname)
     {
-        
-    }
-   
-    public Boolean setName(String name)
-    {
-       
+        Boolean nameright = true;
+        char first;
+        if(!newname.isEmpty())
         {
+            first = (newname.charAt(0));
             
+            if((first == ('T')) || (first == ('D')))
+            {
+                name = newname;
+                return nameright;
+            
+            }
+            else
+            {
+                nameright = false;
+                return nameright;
+            }
         }
-        return true;
+        else{
+            nameright = false;
+            return nameright;
+        }
     }
+        
     public String getName()
     {
         return name;
     }
     public Boolean spendPava(int amount)
     {
-        if(pavaamnt > 0)
+        Boolean spend = true;
+        if(amount < 0)
         {
-            pavaamnt = pavaamnt - amount;
-            return true;
+            spend = false;
+            return spend;
         }
-        return false;
+        else
+        {
+            pavaamnt -= amount;
+            spend = true;
+            return spend;
+        }
 
     }
     public Boolean receivePava(int amount)
     {
-        if(pavaamnt <= 0)
+        Boolean give = true;
+        if(amount < 0)
         {
-            return false;
+            give = false;
+            return give;
         }
         else
         {
             pavaamnt += amount;
-            return true;
+            give = true;
+            return give;
         }
+ 
     }
     public int getPava()
     {
@@ -80,6 +104,6 @@ public class Tavunu {
     }
     public String toString()
     {
-        return (name + pavaamnt + birthdate);
+        return (name + " born in " + birthdate + " has " + pavaamnt + " pava." );
     }
 }
